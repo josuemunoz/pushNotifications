@@ -52,7 +52,7 @@ var app = {
 		
 		
 		var pushNotification = window.plugins.pushNotification;
-pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"240787274968","ecb":"app.com.phonegap.helloworld"});
+pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"240787274968","ecb":"com.phonegap.helloworld"});
 		
     },
 	// result contains any message sent from the plugin call
