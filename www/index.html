@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <!--
 
 
@@ -28,29 +27,68 @@ Server Key => AIzaSyA9SwGXxkAcNULQGVQTGIkZ5NY7zCE7aBg
     specific language governing permissions and limitations
     under the License.
 -->
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=1;"/>
-                <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>josue app PushNotification</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
+<head>
+<title>com.PhoneGap.c2dm</title>
+
+ <script type="application/javascript"> 
+ //app.initialize();
+        
+        var pushNotification = window.plugins.pushNotification;
+pushNotification.register(successHandler, errorHandler,{"senderID":"240787274968","ecb":"app.onNotificationGCM"});
+		
+    
+	// result contains any message sent from the plugin call
+successHandler: function(result) {
+    alert('Callback Success! Result = '+result)
+}
+errorHandler:function(error) {
+    alert(error);
+}
+
+onNotificationGCM: function(e) {
+        switch( e.event )
+        {
+            case 'registered':
+                if ( e.regid.length > 0 )
+                {
+                    console.log("Regid " + e.regid);
+                    alert('registration id = '+e.regid);
+                }
+            break;
+ 
+            case 'message':
+              // this is the actual push notification. its format depends on the data model from the push server
+              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
+            break;
+ 
+            case 'error':
+              alert('GCM error = '+e.msg);
+            break;
+ 
+            default:
+              alert('An unknown GCM event has occurred');
+              break;
+        }
+    }
+		
+        </script>
+
+<!-- Include my Javascript routines -->
+
+
+</head>
+<body>
+	<div id="app-status-div">
+		<ul id="app-status-ul">
+			<li>Cordova Google Cloud Messaging Plugin</li>
+		</ul>
+	</div>
+</body>
+</html>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-
-        </script>
-    </body>
-</html>
+       
+       <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>	
+		
